@@ -1,7 +1,7 @@
 from django.core.validators import validate_email
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.backends import BaseBackend
-from django.contrib.auth.models import User
 
 class Article(models.Model):
     title = models.CharField(max_length=100, verbose_name='Озаглавие')
@@ -15,7 +15,7 @@ class Article(models.Model):
                                          verbose_name='Путь к шаблону')
 
 class Like(models.Model):
-    user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE, verbose_name='Лайкнувший')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='likes', on_delete=models.CASCADE, verbose_name='Лайкнувший')
     article = models.ForeignKey(Article, related_name='likes', on_delete=models.CASCADE, verbose_name='Запись')
 
 class Subject(models.Model):
@@ -45,19 +45,20 @@ class EmailBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None):
         if email_validator(username):
             try:
-                user = User.objects.get(email=username)
-            except User.DoesNotExist:
+                user = settings.AUTH_USER_MODEL.objects.get(email=username)
+            except settings.AUTH_USER_MODEL.DoesNotExist:
                 return None
         else:
             try:
-                user = User.objects.get(username=username)
-            except User.DoesNotExist:
+                user = settings.AUTH_USER_MODEL.objects.get(username=username)
+            except settings.AUTH_USER_MODEL.DoesNotExist:
                 return None
         if user.check_password(password):
             return user
 
     def get_user(self, user_id):
         try:
-            return User.objects.get(pk=user_id)
-        except User.DoesNotExist:
+            return settings.AUTH_USER_MODEL.objects.get(pk=user_id)
+        except settings.AUTH_USER_MODEL.DoesNotExist:
             return None
+
