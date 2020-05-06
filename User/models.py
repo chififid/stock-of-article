@@ -19,9 +19,10 @@ class User(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
 class Activate(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    email = models.EmailField()
     key = models.IntegerField(unique=True)
     activate = models.BooleanField(null=True, blank=True, default=False)
+    password = models.CharField(max_length=150, blank=True, null=True,)
 
     def __str__(self):
         return str(self.key)
