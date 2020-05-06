@@ -32,7 +32,9 @@ def confirm(request, email, login):
                 password = Activate.objects.get(email=email).password
                 user = User(email=email, password=password, username=login)
                 user.save()
-                return HttpResponseRedirect('')
+                for i in Activate.objects.get(email=email):
+                    i.delete()
+                return HttpResponseRedirect(reverse('register'))
             else:
                 context = {'form': form}
                 return render(request, 'User/confirm.html', context)
