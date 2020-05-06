@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from .managers import CustomUserManager
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 class User(AbstractUser):
     username = models.CharField(_('username'), max_length=150, blank=True)
@@ -16,3 +17,15 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+
+class Activate(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    key = models.IntegerField(unique=True)
+    activate = models.BooleanField(null=True, blank=True, default=False)
+
+    def __str__(self):
+        return str(self.key)
+
+    class Meta:
+        verbose_name = 'Активация'
+        verbose_name_plural = 'Активации'

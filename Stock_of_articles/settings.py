@@ -125,3 +125,8 @@ PASSWORD_RESET_TIMEOUT_DAYS = 2
 
 AUTHENTICATION_BACKENDS = ['main.models.EmailBackend']
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'stock.of.articles@gmail.com'
+EMAIL_HOST_PASSWORD = 'Roma01122006'
+EMAIL_PORT = 587

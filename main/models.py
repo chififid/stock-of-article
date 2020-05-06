@@ -2,6 +2,7 @@ from django.core.validators import validate_email
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.backends import BaseBackend
+from User.models import User
 
 class Article(models.Model):
     title = models.CharField(max_length=100, verbose_name='Озаглавие')
@@ -45,20 +46,20 @@ class EmailBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None):
         if email_validator(username):
             try:
-                user = settings.AUTH_USER_MODEL.objects.get(email=username)
-            except settings.AUTH_USER_MODEL.DoesNotExist:
+                user = User.objects.get(email=username)
+            except User.DoesNotExist:
                 return None
         else:
             try:
-                user = settings.AUTH_USER_MODEL.objects.get(username=username)
-            except settings.AUTH_USER_MODEL.DoesNotExist:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
                 return None
         if user.check_password(password):
             return user
 
     def get_user(self, user_id):
         try:
-            return settings.AUTH_USER_MODEL.objects.get(pk=user_id)
-        except settings.AUTH_USER_MODEL.DoesNotExist:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
             return None
 
