@@ -1,9 +1,9 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from .forms import MyForm, ConfirmForm
 from django.views.generic.edit import FormView
-from .models import User, Activate
+from .models import User
 from .service import send
 from random import randint
 
@@ -15,29 +15,30 @@ class MyRegisterFormView(FormView):
 
     def form_valid(self, form):
         user_key = randint(100000, 999999)
-        activate = Activate(email=form.instance.email, key=user_key, activate=False, password=form.instance.password)
-        activate.save()
+        user = form.save()
+        user.key = user_key
+        user.is_active = False
+        user.save()
         send(form.instance.email, user_key)
-        return HttpResponseRedirect(reverse('confirm', kwargs={'email': form.instance.email,
-                                                               'login': form.instance.username}))
+        return HttpResponseRedirect(reverse('confirm', kwargs={'email': form.instance.email}))
 
     def form_invalid(self, form):
         return super(MyRegisterFormView, self).form_invalid(form)
 
-def confirm(request, email, login):
+def confirm(request, email):
     if request.method == 'POST':
         form = ConfirmForm(request.POST)
         if form.is_valid():
-            if int(form.cleaned_data["key"]) == int(Activate.objects.get(email=email).key):
-                password = Activate.objects.get(email=email).password
-                user = User(email=email, password=password, username=login)
+            if int(form.cleaned_data["key"]) == int(User.objects.get(email=email).key):
+                user = User.objects.get(email=email)
+                user.is_active = True
                 user.save()
-                for i in Activate.objects.get(email=email):
-                    i.delete()
                 return HttpResponseRedirect(reverse('register'))
+
             else:
                 context = {'form': form}
                 return render(request, 'User/confirm.html', context)
+
         else:
             context = {'form': form}
             return render(request, 'User/confirm.html', context)

@@ -3,5 +3,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('register/', MyRegisterFormView.as_view(), name="register"),
-    path('confirm/<str:email>/<str:login>', confirm, name="confirm"),
+    path('confirm/<str:email>', confirm, name="confirm"),
 ]
