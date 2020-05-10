@@ -17,7 +17,7 @@ class MyForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'subjects', 'password1', 'password2')
+        fields = ('username', 'email', 'img', 'subjects', 'password1', 'password2')
 
 class ConfirmForm(forms.Form):
     key = forms.IntegerField(label='key')
