@@ -1,4 +1,4 @@
-from User.views import MyRegisterFormView, confirm
+from .views import MyRegisterFormView, confirm
 from django.urls import path, include
 
 urlpatterns = [

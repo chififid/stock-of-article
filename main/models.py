@@ -16,7 +16,8 @@ class Article(models.Model):
                                          verbose_name='Путь к шаблону')
 
 class Like(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='likes', on_delete=models.CASCADE, verbose_name='Лайкнувший')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='likes', on_delete=models.CASCADE,
+                             verbose_name='Лайкнувший')
     article = models.ForeignKey(Article, related_name='likes', on_delete=models.CASCADE, verbose_name='Запись')
 
 class Subject(models.Model):
@@ -62,3 +63,14 @@ class EmailBackend(BaseBackend):
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
             return None
+
+class Reviews(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    text = models.TextField("Сообщение", max_length=5000)
+    parent = models.ForeignKey(
+        'self', verbose_name="Родитель", on_delete=models.SET_NULL, blank=True, null=True
+    )
+    article = models.ForeignKey(Article, verbose_name='Статья', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.user) + ' - ' + str(self.article)
