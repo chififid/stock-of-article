@@ -3,16 +3,17 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.backends import BaseBackend
 from User.models import User
+import os
 
 class Article(models.Model):
     title = models.CharField(max_length=100, verbose_name='Озаглавие')
     subjects = models.ManyToManyField('Subject', verbose_name='Тематики', related_name='articles')
-    path_to_txt = models.FilePathField(path='D:\Рабочий Стол\Stock_of_articles\main\Article_txt', match='.txt$',
+    path_to_txt = models.FilePathField(path=os.getcwd() + '\main\Article_txt', match='.txt$',
                                        verbose_name='Путь к txt шаблона')
     img = models.ImageField(verbose_name='Картинка на привью')
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
     views = models.IntegerField(editable=False, null=True, blank=True)
-    template_path = models.FilePathField(path='D:\Рабочий Стол\Stock_of_articles\main\\templates\main', match='.html$',
+    template_path = models.FilePathField(path=os.getcwd() + '\main\\templates\main', match='.html$',
                                          verbose_name='Путь к шаблону')
 
 class Like(models.Model):
