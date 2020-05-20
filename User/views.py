@@ -24,12 +24,12 @@ class MyRegisterFormView(FormView):
         r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
         result = r.json()
         if result['success']:
-            form.save()
             user_key = randint(100000, 999999)
-            user = form.save()
+            user = form.save(commit=False)
             user.key = user_key
             user.is_active = False
             user.save()
+            form.save_m2m()
             send(form.instance.email, user_key)
             return HttpResponseRedirect(reverse('confirm', kwargs={'email': form.instance.email}))
         else:

@@ -1,1 +1,6 @@
-from django.conf.urls import include, url, re_path
+from django.urls import include, path
+from .views import main
+
+urlpatterns = [
+    path('', main, name="main"),
+]

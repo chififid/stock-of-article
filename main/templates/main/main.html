@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'reset/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Главная</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="{% static 'img/logo.png' %}" alt="logo" class="logo-icon">
+            </div>
+            <form action="" class="search">
+                <button class="search-button">
+                    <img src="{% static 'img/search.png' %}" alt="search" class='search-icon'>
+                </button>
+                <input type="search" class="search-input" placeholder="Темы, названия">
+            </form>
+            <div class="settings">
+                <button class="settings-button">
+                    <img src="{% static 'img/settings.png' %}" alt="settings" class="settings-icon">
+                </button>
+            </div>
+            <div class="user">
+                <div class="bookmark">
+                    <a href="">
+                        <img src="{% static 'img/bookmark.png' %}" alt="bookmark", class="bookmark-icon">
+                    </a>
+                </div>
+                <div class="alert">
+                    <a href="">
+                        <img src="{% static 'img/alert.png' %}" alt="alert" class="alert-icon">
+                    </a>
+                </div>
+                <div class="profile">
+                    <a href="">
+                        {% if user.img %}
+                            <img src="{{ user.img.url }}" alt="profile-icon" class="profile-icon">
+                        {% else %}
+                            <img src="{% static 'img/no-avatar.jpeg' %}" alt="profile-icon" class="profile-icon">
+                        {% endif %} 
+                    </a>              
+                </div>
+            </div>
+        </header>
+    </div>
+    <div class="containertwo">
+        <div class="main">
+            <nav class='nav'>
+                <div class="favorite_subjects">
+                    {% for i in favorite_subjects %}
+                        <a href="">
+                            {% if i.pk == select %}
+                                <div class='select_subject'>{{ i.name }}</div>
+                            {% else %}
+                                <div class='different_subject'>{{ i.name }}</div>
+                            {% endif %} 
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="other_subjects">
+                    <p class='other'>Остальное</p>
+                    {% for i in all_subjects %}
+                        <a href="">
+                            {% if i.pk == select %}
+                                <div class='select_subject'>{{ i.name }}</div>
+                            {% else %}
+                                <div class='different_subject'>{{ i.name }}</div>
+                            {% endif %} 
+                        </a> 
+                    {% endfor %}
+                    <p class='hied'>Скрыть</p>
+                </div>
+                <div class="about_and_help">
+                    <div class='about_and_help_text'><a href="" class='about_and_help_text'>* О нас *</a></div>
+                    <div class='about_and_help_text'><a href="" class='about_and_help_text'>* Помощь *</a></div>
+                    <div class='about_and_help_text'><a href="" class='about_and_help_text'>* Поддержка *</a></div>
+                </div>
+            </nav>
+            <div class="articles">
+                {% for i in all_articles %}
+                <div class='article'>
+                    <a href="" class="article-href">
+                        {% if i.color == 'b' or i.color == None %}
+                            <p class="article-text-black">{{ i.title }}</p>
+                        {% else %}
+                            <p class="article-text-white">{{ i.title }}</p>
+                        {% endif %}
+                        <img src="{{ i.img.url }}" alt="artilce-img" width="455px" height="320px" class="article-img">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>

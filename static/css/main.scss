@@ -1,0 +1,296 @@
+$background-header: #f3dbb3;
+$placeholder: black;
+$search-input-color: white;
+$background-main: #e2b87f;
+$nav-text-color: #ffffff;
+$text-main-color-black: black;
+$text-main-color-white: white;
+$nav_text_hover: #5ec9f3;
+$nav-text-color-select: #8cff96;
+@font-face {
+    font-family: "SegoePrintRegular";
+    src: url("../fonts/SegoePrintRegular/SegoePrintRegular.eot");
+    src: url("../fonts/SegoePrintRegular/SegoePrintRegular.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/SegoePrintRegular/SegoePrintRegular.woff") format("woff"),
+    url("../fonts/SegoePrintRegular/SegoePrintRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+.container {
+    background-color: $background-header;
+    height: 87px;
+    min-width: 1600px;
+}
+.header {
+    width: 1600px;
+    margin: auto;
+    display: flex;
+    height: 87px;
+}
+.logo-icon {
+    width: 145px;
+    height: 77px;
+}
+.logo {
+    margin-top: 6px;
+    margin-left: 10px;
+}
+.search {
+    margin-left: 20px;
+    display: flex;
+}
+.search-input {
+    font-size: 14px;
+    line-height: 16px;
+
+    padding: 12px 18px 12px 50px;
+    margin-top: 25px;
+    color: $placeholder;
+    border: 2px solid $placeholder;
+    border-radius: 8px;
+    background-color: $search-input-color;
+    height: 35px;
+    width: 800px;
+
+    flex: 1;
+
+    ::-webkit-input-placeholder {
+        /* Edge */
+        color: $placeholder;
+    }
+
+    :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: $placeholder;
+    }
+
+    ::placeholder {
+        color: $placeholder;
+    }
+}
+.search-button {
+    border: none;
+    background-color: transparent;
+    transform: translate(26px, 0);
+    padding: 0;
+}
+.search-button:hover{
+    opacity: 0.7;
+}
+.search-icon {
+    width: 20px;
+    padding: 0;
+}
+.settings-button {
+    border: none;
+    background-color: transparent;
+    margin-top: 28px;
+    margin-left: 5px;
+    width: 0;
+    padding: 0;
+}
+.settings-icon {
+    width: 29px;
+}
+.settings-icon:hover {
+    animation: 1s linear .1s infinite rotate-settings;
+}
+.user {
+    margin-top: 15px;
+    display: flex;
+    margin-left: auto;
+    margin-right: 0em;
+}
+.profile-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.profile-icon:hover {
+    opacity: 0.7;
+}
+.profile {
+    margin-left: 30px;
+}
+.alert {
+    margin-left: 30px;
+}
+.alert-icon {
+    width: 36px;
+    margin-top: 6px;
+}
+.alert-icon:hover {
+    animation: 1s linear .1s infinite alert_animation;
+}
+.bookmark-icon {
+    width: 40px;
+    margin-top: 6px;
+    margin-left: 40px;
+}
+.bookmark-icon:hover {
+    background-image: url(../img/bookmark-hover.png);
+    background-size: 45px;
+}
+.containertwo {
+    background: $background-main;
+    min-width: 1600px;
+    min-height: 1800px;
+    height: 100vh;
+
+}
+.main {
+    width: 1600px;
+    margin: auto;
+    display: flex;
+}
+.nav {
+
+    font-family: "SegoePrintRegular";
+    color: $nav-text-color;
+    text-decoration: none;
+    width: 244px;
+}
+.article {
+    float: left;
+    width: 455px;
+    height: 320px;
+    margin-top: 11px;
+    margin-left: 11px;
+    display: flex;
+}
+.article-img {
+    border-radius: 20px;
+    border: 2px solid $placeholder;
+}
+.article-img:hover {
+    opacity: 0.5;
+}
+.different_subject {
+    color: $nav-text-color;
+    text-decoration: none;
+}
+.different_subject:hover {
+    color: $nav_text_hover;
+}
+.different_subject:visited {
+    color: $nav-text-color
+}
+.article-text-black{
+    font-family: "SegoePrintRegular";
+    height: 0px;
+    font-size: 23px;
+    color: $text-main-color-black;
+    transform: translate(0, 240px);
+    margin-left: auto;
+    width: 430px;
+}
+.article-text-white{
+    font-family: "SegoePrintRegular";
+    height: 0px;
+    font-size: 23px;
+    color: $text-main-color-white;
+    transform: translate(0, 240px);
+    margin-left: auto;
+    width: 430px;
+}
+a {
+    text-decoration: none;
+}
+.different_subject {
+    font-size: 25px;
+    margin-top: 20px;
+}
+.about_and_help {
+    font-family: "SegoePrintRegular";
+    margin-top: 270px;
+    color: $placeholder;
+}
+.about_and_help_text {
+    font-family: "SegoePrintRegular";
+    color: $nav-text-color;
+    font-size: 20px;
+    margin-top: 15px;
+}
+.about_and_help_text:hover {
+    color: $nav_text_hover;
+}
+.other {
+    margin-left: 25px;
+    margin-top: 20px;
+    color: $nav-text-color;
+    font-size: 20px;
+    border-bottom: 2px solid $nav-text-color;
+    width: 116px
+}
+.other:hover {
+    color: $nav_text_hover;
+    border-bottom: 2px solid $nav_text_hover;
+}
+.hied {
+    margin-left: 25px;
+    margin-top: 20px;
+    color: $nav-text-color;
+    font-size: 20px;
+    border-bottom: 2px solid $nav-text-color;
+    width: 85px
+}
+.hied:hover {
+    color: $nav_text_hover;
+    border-bottom: 2px solid $nav_text_hover;
+}
+.select_subject {
+    font-size: 25px;
+    margin-top: 20px;
+    color: $nav-text-color-select;
+}
+.select_subject:hover {
+    color: $nav_text_hover;
+}
+@keyframes alert_animation { 
+    0% {
+        transform: rotate(0deg);
+    }
+
+    10% {
+        transform: rotate(15deg);
+    }
+
+    20% {
+        transform: rotate(20deg);
+    }
+    35% {
+        transform: rotate(15deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    60% {
+        transform: rotate(-15deg);
+    }
+
+    70% {
+        transform: rotate(-20deg);
+    }
+    85% {
+        transform: rotate(-15deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+
+}
+@keyframes rotate-settings { 
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
