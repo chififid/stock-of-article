@@ -260,12 +260,15 @@ a {
 }
 
 .other {
+  font-family: "SegoePrintRegular";
   margin-left: 25px;
   margin-top: 20px;
   color: #ffffff;
   font-size: 20px;
+  border: none;
   border-bottom: 2px solid #ffffff;
-  width: 116px;
+  width: 130px;
+  background-color: transparent;
 }
 
 .other:hover {
@@ -273,13 +276,33 @@ a {
   border-bottom: 2px solid #5ec9f3;
 }
 
+.other:active {
+  background-color: transparent;
+}
+
+input:active, input:focus, button:active, button:focus {
+  outline: none !important;
+}
+
+input::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0 !important;
+}
+
 .hied {
-  margin-left: 25px;
-  margin-top: 20px;
   color: #ffffff;
   font-size: 20px;
+  margin-left: 25px;
+  margin-top: 20px;
+  border: none;
   border-bottom: 2px solid #ffffff;
-  width: 85px;
+  width: 98px;
+  background-color: transparent;
+  font-family: "SegoePrintRegular";
+}
+
+.other_subject {
+  opacity: 0;
+  height: 1px;
 }
 
 .hied:hover {
@@ -295,6 +318,13 @@ a {
 
 .select_subject:hover {
   color: #5ec9f3;
+}
+
+.null_articles {
+  font-family: "SegoePrintRegular";
+  font-size: 30px;
+  margin-left: 400px;
+  margin-top: 10px;
 }
 
 @-webkit-keyframes alert_animation {

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from main.models import Subject, Article
-
+from re import findall
 
 def sort(before, favorite):
     favorites = []
@@ -40,6 +40,16 @@ def sort(before, favorite):
     return after
 
 
+def search(search, articles):
+    articles_answer = []
+    for i in articles:
+        article_name = findall(r'%s' % search.lower(), i.title.lower())
+        article_rubric = findall(r'%s' % search.lower(), Subject.objects.get(pk=i.subject.pk).name.lower())
+        if article_name or article_rubric:
+            articles_answer.append(i)
+    return articles_answer
+
+
 def main(request):
     user = request.user
     all_subjects = Subject.objects.order_by('name')
@@ -60,13 +70,30 @@ def subject_articles(request, subject_id):
     user = request.user
     select = Subject.objects.get(pk=subject_id).pk
     articles = Article.objects.filter(subject=subject_id).order_by('views')
-    all_subjects = Subject.objects.order_by('published')
+    favorite_subjects = user.subjects.all()
+    all_subjects = set(Subject.objects.order_by('name')) - set(favorite_subjects)
     if user.is_authenticated:
-        favorite_subjects = user.subjects.order_by('published')
         context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': favorite_subjects,
                    'all_articles': articles, 'select': select}
         return render(request, 'main/main.html', context)
     else:
         context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': None,
                    'all_articles': articles, 'select': select}
+        return render(request, 'main/main.html', context)
+
+
+def search_articles(request):
+    user = request.user
+    all_subjects = Subject.objects.order_by('name')
+    if user.is_authenticated:
+        favorite_subjects = user.subjects.all()
+        all_subjects = set(all_subjects) - set(favorite_subjects)
+        all_articles = Article.objects.all()
+        all_articles = search(request.GET.get('search'), all_articles)
+        context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': favorite_subjects,
+                   'all_articles': all_articles, 'select': None}
+        return render(request, 'main/main.html', context)
+    else:
+        context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': None,
+                   'all_articles': Article.objects.all(), 'select': None}
         return render(request, 'main/main.html', context)

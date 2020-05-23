@@ -217,24 +217,43 @@ a {
     color: $nav_text_hover;
 }
 .other {
+    font-family: "SegoePrintRegular";
     margin-left: 25px;
     margin-top: 20px;
     color: $nav-text-color;
     font-size: 20px;
+    border: none;
     border-bottom: 2px solid $nav-text-color;
-    width: 116px
+    width: 130px;
+    background-color: transparent;
 }
 .other:hover {
     color: $nav_text_hover;
     border-bottom: 2px solid $nav_text_hover;
 }
+.other:active {
+    background-color: transparent;
+}
+input:active, input:focus, button:active, button:focus {
+    outline: none !important;
+  }
+input::-moz-focus-inner, input::-moz-focus-inner {
+    border: 0 !important;
+  }
 .hied {
-    margin-left: 25px;
-    margin-top: 20px;
     color: $nav-text-color;
     font-size: 20px;
+    margin-left: 25px;
+    margin-top: 20px;
+    border: none;
     border-bottom: 2px solid $nav-text-color;
-    width: 85px
+    width: 98px;
+    background-color: transparent;
+    font-family: "SegoePrintRegular";
+}
+.other_subject{
+    opacity: 0;
+    height: 1px;
 }
 .hied:hover {
     color: $nav_text_hover;
@@ -247,6 +266,12 @@ a {
 }
 .select_subject:hover {
     color: $nav_text_hover;
+}
+.null_articles {
+    font-family: "SegoePrintRegular";
+    font-size: 30px;
+    margin-left: 400px;
+    margin-top: 10px;
 }
 @keyframes alert_animation { 
     0% {

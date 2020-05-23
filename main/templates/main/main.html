@@ -11,13 +11,15 @@
     <div class="container">
         <header class="header">
             <div class="logo">
-                <img src="{% static 'img/logo.png' %}" alt="logo" class="logo-icon">
+                <a href="/">
+                    <img src="{% static 'img/logo.png' %}" alt="logo" class="logo-icon">
+                </a>
             </div>
-            <form action="" class="search">
+            <form class="search" action="{% url 'search' %}" method="get">
                 <button class="search-button">
                     <img src="{% static 'img/search.png' %}" alt="search" class='search-icon'>
                 </button>
-                <input type="search" class="search-input" placeholder="Темы, названия">
+                <input type="search" class="search-input" placeholder="Темы, названия" name="search">
             </form>
             <div class="settings">
                 <button class="settings-button">
@@ -52,7 +54,7 @@
             <nav class='nav'>
                 <div class="favorite_subjects">
                     {% for i in favorite_subjects %}
-                        <a href="">
+                        <a href="/subject/{{ i.pk }}">
                             {% if i.pk == select %}
                                 <div class='select_subject'>{{ i.name }}</div>
                             {% else %}
@@ -62,17 +64,17 @@
                     {% endfor %}
                 </div>
                 <div class="other_subjects">
-                    <p class='other'>Остальное</p>
+                    <div class='other_div'><input class='other' type="button" value="Остальное"></div>
                     {% for i in all_subjects %}
-                        <a href="">
+                        <a href="/subject/{{ i.pk }}">
                             {% if i.pk == select %}
-                                <div class='select_subject'>{{ i.name }}</div>
+                                <div class='select_subject other_subject' id="other_subject">{{ i.name }}</div>
                             {% else %}
-                                <div class='different_subject'>{{ i.name }}</div>
+                                <div class='different_subject other_subject' id="other_subject">{{ i.name }}</div>
                             {% endif %} 
                         </a> 
                     {% endfor %}
-                    <p class='hied'>Скрыть</p>
+                    <div class='hied_div'><input class='hied other_subject' type="button" value="Скрыть"></div>
                 </div>
                 <div class="about_and_help">
                     <div class='about_and_help_text'><a href="" class='about_and_help_text'>* О нас *</a></div>
@@ -81,19 +83,29 @@
                 </div>
             </nav>
             <div class="articles">
-                {% for i in all_articles %}
-                <div class='article'>
-                    <a href="" class="article-href">
-                        {% if i.color == 'b' or i.color == None %}
-                            <p class="article-text-black">{{ i.title }}</p>
-                        {% else %}
-                            <p class="article-text-white">{{ i.title }}</p>
-                        {% endif %}
-                        <img src="{{ i.img.url }}" alt="artilce-img" width="455px" height="320px" class="article-img">
-                    </a>
-                </div>
-                {% endfor %}
+                {% if all_articles %}
+                    {% for i in all_articles %}
+                    <div class='article'>
+                        <a href="" class="article-href">
+                            {% if i.color == 'b' or i.color == None %}
+                                <p class="article-text-black">{{ i.title }}</p>
+                            {% else %}
+                                <p class="article-text-white">{{ i.title }}</p>
+                            {% endif %}
+                            <img src="{{ i.img.url }}" alt="artilce-img" width="455px" height="320px" class="article-img">
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="null_articles"> Записей не найдено :(</p>
+                {% endif %}
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="{% static 'js/main.js' %}" defer></script>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
 </body>
+</html>
