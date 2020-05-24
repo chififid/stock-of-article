@@ -122,3 +122,15 @@ class Review(models.Model):
 
     def __str__(self):
         return str(self.user) + ' - ' + str(self.article)
+
+
+class Bookmark(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, verbose_name='Статья', on_delete=models.CASCADE)
+    published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=300, verbose_name='Озаглавие')
+    published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')

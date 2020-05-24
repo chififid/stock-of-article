@@ -48,7 +48,7 @@
   border-radius: 8px;
   background-color: white;
   height: 35px;
-  width: 800px;
+  width: 840px;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -72,6 +72,12 @@
   color: black;
 }
 
+.settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .search-button {
   border: none;
   background-color: transparent;
@@ -92,7 +98,7 @@
 .settings-button {
   border: none;
   background-color: transparent;
-  margin-top: 28px;
+  margin-top: 3px;
   margin-left: 5px;
   width: 0;
   padding: 0;
@@ -192,6 +198,7 @@
 .article-img {
   border-radius: 20px;
   border: 2px solid black;
+  z-index: 0;
 }
 
 .article-img:hover {
@@ -325,6 +332,52 @@ input::-moz-focus-inner, input::-moz-focus-inner {
   font-size: 30px;
   margin-left: 400px;
   margin-top: 10px;
+}
+
+.form {
+  position: absolute;
+  background-color: white;
+  width: 290px;
+  height: 115px;
+  z-index: 10;
+  border-radius: 25px;
+  border: 1px solid black;
+  margin: 10px 0 0 50px;
+}
+
+.close_form_select {
+  opacity: 0;
+  font-size: 1px;
+}
+
+.sort_published {
+  padding: 5px;
+  font-size: 18px;
+  font-family: "SegoePrintRegular";
+}
+
+.select-filter {
+  margin-left: 50px;
+}
+
+.new, .last {
+  margin-left: 10px;
+}
+
+.more-popular, .less-popular {
+  margin-top: 8px;
+}
+
+.sort_published input[type="radio"] {
+  -webkit-appearance: none;
+  border: none;
+  width: 18px;
+  height: 17px;
+  background: url(../img/checkmarkertwo.png) left center no-repeat;
+}
+
+.sort_published input[type="radio"]:checked {
+  background: url(../img/checkmarker.png) left center no-repeat;
 }
 
 @-webkit-keyframes alert_animation {

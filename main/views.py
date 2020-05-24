@@ -61,7 +61,7 @@ def main(request):
                    'all_articles': all_articles, 'select': None}
         return render(request, 'main/main.html', context)
     else:
-        context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': None,
+        context = {'all_subjects': None, 'user': user, 'favorite_subjects': all_subjects,
                    'all_articles': Article.objects.all(), 'select': None}
         return render(request, 'main/main.html', context)
 
@@ -69,15 +69,15 @@ def main(request):
 def subject_articles(request, subject_id):
     user = request.user
     select = Subject.objects.get(pk=subject_id).pk
-    articles = Article.objects.filter(subject=subject_id).order_by('views')
-    favorite_subjects = user.subjects.all()
-    all_subjects = set(Subject.objects.order_by('name')) - set(favorite_subjects)
+    articles = Article.objects.filter(subject=subject_id)
     if user.is_authenticated:
+        favorite_subjects = user.subjects.all()
+        all_subjects = set(Subject.objects.order_by('name')) - set(favorite_subjects)
         context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': favorite_subjects,
                    'all_articles': articles, 'select': select}
         return render(request, 'main/main.html', context)
     else:
-        context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': None,
+        context = {'all_subjects': None, 'user': user, 'favorite_subjects': Subject.objects.order_by('name'),
                    'all_articles': articles, 'select': select}
         return render(request, 'main/main.html', context)
 
@@ -88,12 +88,25 @@ def search_articles(request):
     if user.is_authenticated:
         favorite_subjects = user.subjects.all()
         all_subjects = set(all_subjects) - set(favorite_subjects)
-        all_articles = Article.objects.all()
+        if request.GET.get('answer'):
+            if request.GET.get('answer') == 'new':
+                all_articles = Article.objects.order_by('published')
+            elif request.GET.get('answer') == 'last':
+                all_articles = Article.objects.order_by('-published')
+            elif request.GET.get('answer') == 'more_popular':
+                all_articles = Article.objects.order_by('views')
+            elif request.GET.get('answer') == 'less_popular':
+                all_articles = Article.objects.order_by('-views')
+        else:
+            all_articles = Article.objects.all()
         all_articles = search(request.GET.get('search'), all_articles)
         context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': favorite_subjects,
                    'all_articles': all_articles, 'select': None}
         return render(request, 'main/main.html', context)
     else:
-        context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': None,
-                   'all_articles': Article.objects.all(), 'select': None}
+        all_articles = Article.objects.all()
+        all_articles = search(request.GET.get('search'), all_articles)
+        context = {'all_subjects': None, 'user': user, 'favorite_subjects': Subject.objects.order_by('name'),
+                   'all_articles': all_articles, 'select': None}
         return render(request, 'main/main.html', context)
+

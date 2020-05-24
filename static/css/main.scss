@@ -51,7 +51,7 @@ $nav-text-color-select: #8cff96;
     border-radius: 8px;
     background-color: $search-input-color;
     height: 35px;
-    width: 800px;
+    width: 840px;
 
     flex: 1;
 
@@ -69,6 +69,9 @@ $nav-text-color-select: #8cff96;
         color: $placeholder;
     }
 }
+.settings {
+    display: flex;
+}
 .search-button {
     border: none;
     background-color: transparent;
@@ -85,7 +88,7 @@ $nav-text-color-select: #8cff96;
 .settings-button {
     border: none;
     background-color: transparent;
-    margin-top: 28px;
+    margin-top: 3px;
     margin-left: 5px;
     width: 0;
     padding: 0;
@@ -163,6 +166,8 @@ $nav-text-color-select: #8cff96;
 .article-img {
     border-radius: 20px;
     border: 2px solid $placeholder;
+    z-index: 0;
+    
 }
 .article-img:hover {
     opacity: 0.5;
@@ -251,7 +256,7 @@ input::-moz-focus-inner, input::-moz-focus-inner {
     background-color: transparent;
     font-family: "SegoePrintRegular";
 }
-.other_subject{
+.other_subject {
     opacity: 0;
     height: 1px;
 }
@@ -272,6 +277,46 @@ input::-moz-focus-inner, input::-moz-focus-inner {
     font-size: 30px;
     margin-left: 400px;
     margin-top: 10px;
+}
+.form {
+    position: absolute;
+    background-color: $search-input-color;
+    width: 290px;
+    height: 115px;
+    z-index: 10;
+    border-radius: 25px;
+    border: 1px solid $placeholder;
+    margin: 10px 0 0 50px;
+}
+.close_form_select {
+    opacity: 0;
+    font-size: 1px;
+}
+.sort_published {
+    padding: 5px;
+    font-size: 18px;
+    font-family: "SegoePrintRegular";
+}
+.select-filter {
+    margin-left: 50px;
+}
+.new, .last {
+    margin-left: 10px;
+}
+.more-popular, .less-popular {
+    margin-top: 8px;
+}
+.sort_published input[type="radio"] {
+    -webkit-appearance: none;
+    border: none;
+    width: 18px;
+    height: 17px;
+    background: url(../img/checkmarkertwo.png) left center no-repeat;
+
+}
+.sort_published input[type="radio"]:checked {
+    background: url(../img/checkmarker.png) left center no-repeat;
+
 }
 @keyframes alert_animation { 
     0% {

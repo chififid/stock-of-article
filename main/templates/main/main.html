@@ -20,12 +20,20 @@
                     <img src="{% static 'img/search.png' %}" alt="search" class='search-icon'>
                 </button>
                 <input type="search" class="search-input" placeholder="Темы, названия" name="search">
-            </form>
             <div class="settings">
-                <button class="settings-button">
-                    <img src="{% static 'img/settings.png' %}" alt="settings" class="settings-icon">
-                </button>
+                <div class="form close_form_select">
+                    <div class="sort_published">
+                        <div class="select-filter">Выберите фильтр</div>
+                        Сначала: <input type="radio" name='answer' value="new" class="new">новые<input type="radio" name='answer' value="last" class=last>старые <br>
+                        <input type="radio" name='answer' value="more_popular" class="more-popular">более популярное <br>
+                        <input type="radio" name='answer' value="less_popular" class="less-popular">менее популярные
+                    </div>
+                </div>
             </div>
+        </form>
+        <button class="settings-button">
+            <img src="{% static 'img/settings.png' %}" alt="settings" class="settings-icon">
+        </button>
             <div class="user">
                 <div class="bookmark">
                     <a href="">
@@ -64,7 +72,9 @@
                     {% endfor %}
                 </div>
                 <div class="other_subjects">
-                    <div class='other_div'><input class='other' type="button" value="Остальное"></div>
+                    {% if user.is_authenticated %}
+                        <div class='other_div'><input class='other' type="button" value="Остальное"></div>
+                    {% endif %} 
                     {% for i in all_subjects %}
                         <a href="/subject/{{ i.pk }}">
                             {% if i.pk == select %}
@@ -74,7 +84,9 @@
                             {% endif %} 
                         </a> 
                     {% endfor %}
-                    <div class='hied_div'><input class='hied other_subject' type="button" value="Скрыть"></div>
+                    {% if user.is_authenticated %}
+                        <div class='hied_div'><input class='hied other_subject' type="button" value="Скрыть"></div>
+                    {% endif %} 
                 </div>
                 <div class="about_and_help">
                     <div class='about_and_help_text'><a href="" class='about_and_help_text'>* О нас *</a></div>
