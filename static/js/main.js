@@ -29,20 +29,28 @@ $(document).ready(function() {
     $(".alert-button").on('click', function() {
         if(alert_select == true){
             $(" .notification-menu").removeClass("on");
+            $(" .alert-icon").removeClass("alert-on")
+            $(" .article-img-alert").addClass("off");
             alert_select = false;
         }
         else if(alert_select == false && bookmark_select == false ){
             $(" .notification-menu").addClass("on");
+            $(" .alert-icon").addClass("alert-on")
+            $(" .article-img-alert").removeClass("off");
             alert_select = true;
         }
     });
     $(".bookmark-button").on('click', function() {
         if(bookmark_select == true){
+            $(" .bookmark-icon").removeClass("bookmark-on")
             $(" .bookmark-menu").removeClass("on");
+            $(" .article-img-bookmark").addClass("off");
             bookmark_select = false;
         }
         else if(bookmark_select == false && alert_select == false){
             $(" .bookmark-menu").addClass("on");
+            $(" .bookmark-icon").addClass("bookmark-on")
+            $(" .article-img-bookmark").removeClass("off");
             bookmark_select = true;
         }
     });

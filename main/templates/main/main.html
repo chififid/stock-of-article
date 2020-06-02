@@ -123,10 +123,57 @@
                 {% endif %}
             </div>
             <div class="notification-menu">
-            fsdahszgfsssssssssssssssssssssssssssrg
+            {% if user.is_authenticated %}
+                    {% if NotificationToday or NotificationYesterday or NotificationOther%}
+                        {% if NotificationToday %}
+                            <p class="time">Сегодня</p>
+                            {% for i in NotificationToday %}
+                                <a class="alert-part" href=''>
+                                    <p class="article-text-alert">{{ i.title }}</p>
+                                    <img src="{{ i.img.url }}" alt="artilce-img-alert" width="64px" height="64px" class="article-img-alert off">
+                                </a>
+                            {% endfor %}
+                        {% endif %}
+                        {% if NotificationYesterday %}
+                            <p class="time">Вчера</p>
+                            {% for i in NotificationYesterday %}
+                                <a class="alert-part" href=''>
+                                    <p class="article-text-alert">{{ i.title }}</p>
+                                    <img src="{{ i.img.url }}" alt="artilce-img-alert" width="64px" height="64px" class="article-img-alert off">
+                                </a>
+                            {% endfor %}
+                        {% endif %}
+                        {% if NotificationOther%}
+                            <p class="time">Ранее</p>
+                            {% for i in NotificationOther %}
+                                <a class="alert-part" href=''>
+                                    <p class="article-text-alert">{{ i.title }}</p>
+                                    <img src="{{ i.img.url }}" alt="artilce-img-alert" width="64px" height="64px" class="article-img-alert off">
+                                </a>
+                            {% endfor %}
+                        {% endif %}
+                    {% else %}
+                        <a href='{% url "login" %}' class="alert-have-no">У вас не найдено уведомлений</a>
+                    {% endif %}
+                {% else %}
+                    <a href='{% url "login" %}' class="alert-no">Данная опция не доступна для неаутифицированных</a>
+                {% endif %}
             </div>
             <div class="bookmark-menu">
-            fsdahszgfsssssssssssssssssssssssssssrg
+                {% if user.is_authenticated %}
+                    {% if Bookmark %}
+                        {% for i in Bookmark %}
+                            <a class="bookmark-part" href=''>
+                                <p class="article-text-bookmark">{{ i.article.title }}</p>
+                                <img src="{{ i.article.img.url }}" alt="artilce-img-bookmark" width="91px" height="64px" class="article-img-bookmark off">
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <a href='{% url "login" %}' class="bookmark-have-no">У вас не найдено закладок</a>
+                    {% endif %}
+                {% else %}
+                    <a href='{% url "login" %}' class="bookmark-no">Данная опция не доступна для неаутифицированных</a>
+                {% endif %}
             </div>
         </div>
     </div>

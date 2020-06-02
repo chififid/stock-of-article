@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.backends import BaseBackend
 from User.models import User
+from django.utils import timezone as tz
 
 
 class Article(models.Model):
@@ -65,13 +66,19 @@ class Bookmark(models.Model):
                                 related_name='BookmarkArticle')
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
 
+    class Meta:
+        ordering = ['-published']
+
 
 class Notification(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь',
                              related_name='Notification')
     title = models.CharField(max_length=300, verbose_name='Озаглавие')
-    published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
+    published = models.DateTimeField(db_index=True, verbose_name='Опубликовано', default=tz.now)
     img = models.ImageField(verbose_name='Картинка на привью', blank=True, null=True)
+
+    class Meta:
+        ordering = ['-published']
 
 
 class EmailBackend(BaseBackend):

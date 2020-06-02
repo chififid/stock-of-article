@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render
 from main.models import Subject, Article, Bookmark, Notification
 from re import findall
@@ -60,7 +62,13 @@ def main(request):
         all_articles = sort(Article.objects.all(), favorite_subjects.all())
         context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': favorite_subjects,
                    'all_articles': all_articles, 'select': None,
-                   'Notification': Notification.objects.filter(user=user),  'Bookmark': Bookmark.objects.filter(user=user)}
+                   'NotificationToday': Notification.objects.filter(user=user, published__gte=datetime.date.today()),
+                   'NotificationYesterday': Notification.objects.filter(published__gte=datetime.date.today() - datetime.
+                                                                        timedelta(days=1), published__lt=datetime.date
+                                                                        .today(), user=user),
+                   'NotificationOther': Notification.objects.filter(published__lt=datetime.date.today() - datetime.
+                                                                    timedelta(days=1)),
+                   'Bookmark': Bookmark.objects.filter(user=user)}
         return render(request, 'main/main.html', context)
     else:
         context = {'all_subjects': None, 'user': user, 'favorite_subjects': all_subjects,
@@ -78,7 +86,13 @@ def subject_articles(request, subject_id):
         all_subjects = set(Subject.objects.order_by('name')) - set(favorite_subjects)
         context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': favorite_subjects,
                    'all_articles': articles, 'select': select,
-                   'Notification': Notification.objects.filter(user=user),  'Bookmark': Bookmark.objects.filter(user=user)}
+                   'NotificationToday': Notification.objects.filter(user=user, published__gte=datetime.date.today()),
+                   'NotificationYesterday': Notification.objects.filter(published__gte=datetime.date.today() - datetime.
+                                                                        timedelta(days=1), published__lt=datetime.date
+                                                                        .today(), user=user),
+                   'NotificationOther': Notification.objects.filter(published__lt=datetime.date.today() - datetime.
+                                                                    timedelta(days=1)),
+                   'Bookmark': Bookmark.objects.filter(user=user)}
         return render(request, 'main/main.html', context)
     else:
         context = {'all_subjects': None, 'user': user, 'favorite_subjects': Subject.objects.order_by('name'),
@@ -107,7 +121,13 @@ def search_articles(request):
         all_articles = search(request.GET.get('search'), all_articles)
         context = {'all_subjects': all_subjects, 'user': user, 'favorite_subjects': favorite_subjects,
                    'all_articles': all_articles, 'select': None,
-                   'Notification': Notification.objects.filter(user=user),  'Bookmark': Bookmark.objects.filter(user=user)}
+                   'NotificationToday': Notification.objects.filter(user=user, published__gte=datetime.date.today()),
+                   'NotificationYesterday': Notification.objects.filter(published__gte=datetime.date.today() - datetime.
+                                                                        timedelta(days=1), published__lt=datetime.date
+                                                                        .today(), user=user),
+                   'NotificationOther': Notification.objects.filter(published__lt=datetime.date.today() - datetime.
+                                                                    timedelta(days=1)),
+                   'Bookmark': Bookmark.objects.filter(user=user)}
         return render(request, 'main/main.html', context)
     else:
         all_articles = Article.objects.all()
