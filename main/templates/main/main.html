@@ -36,23 +36,33 @@
         </button>
             <div class="user">
                 <div class="bookmark">
-                    <a href="">
+                    <button class="bookmark-button">
                         <img src="{% static 'img/bookmark.png' %}" alt="bookmark", class="bookmark-icon">
-                    </a>
+                    </button>
                 </div>
                 <div class="alert">
-                    <a href="">
+                    <button class='alert-button'>
                         <img src="{% static 'img/alert.png' %}" alt="alert" class="alert-icon">
-                    </a>
+                    </button>
                 </div>
                 <div class="profile">
-                    <a href="">
-                        {% if user.img %}
-                            <img src="{{ user.img.url }}" alt="profile-icon" class="profile-icon">
-                        {% else %}
-                            <img src="{% static 'img/no-avatar.jpeg' %}" alt="profile-icon" class="profile-icon">
-                        {% endif %} 
-                    </a>              
+                    {% if user.is_authenticated %}
+                        <a href="">
+                            {% if user.img %}
+                                <img src="{{ user.img.url }}" alt="profile-icon" class="profile-icon">
+                            {% else %}
+                                <img src="{% static 'img/no-avatar.jpeg' %}" alt="profile-icon" class="profile-icon">
+                            {% endif %} 
+                        </a> 
+                    {% else %}
+                        <a href="{% url 'login' %}">
+                            {% if user.img %}
+                                <img src="{{ user.img.url }}" alt="profile-icon" class="profile-icon">
+                            {% else %}
+                                <img src="{% static 'img/no-avatar.jpeg' %}" alt="profile-icon" class="profile-icon">
+                            {% endif %} 
+                        </a> 
+                    {% endif %}              
                 </div>
             </div>
         </header>
@@ -111,6 +121,12 @@
                 {% else %}
                     <p class="null_articles"> Записей не найдено :(</p>
                 {% endif %}
+            </div>
+            <div class="notification-menu">
+            fsdahszgfsssssssssssssssssssssssssssrg
+            </div>
+            <div class="bookmark-menu">
+            fsdahszgfsssssssssssssssssssssssssssrg
             </div>
         </div>
     </div>

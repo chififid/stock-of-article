@@ -1,4 +1,6 @@
 var form_select = false;
+var alert_select = false;
+var bookmark_select = false;
 $(document).ready(function() {
     $('.other').on('click', function() {
         $(' #other_subject').removeClass('other_subject');
@@ -24,4 +26,24 @@ $(document).ready(function() {
             form_select = true;
         }        
     })
+    $(".alert-button").on('click', function() {
+        if(alert_select == true){
+            $(" .notification-menu").removeClass("on");
+            alert_select = false;
+        }
+        else if(alert_select == false && bookmark_select == false ){
+            $(" .notification-menu").addClass("on");
+            alert_select = true;
+        }
+    });
+    $(".bookmark-button").on('click', function() {
+        if(bookmark_select == true){
+            $(" .bookmark-menu").removeClass("on");
+            bookmark_select = false;
+        }
+        else if(bookmark_select == false && alert_select == false){
+            $(" .bookmark-menu").addClass("on");
+            bookmark_select = true;
+        }
+    });
 })

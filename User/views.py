@@ -10,6 +10,7 @@ from django.conf import settings
 from django.contrib import messages
 import requests
 
+
 class MyRegisterFormView(FormView):
     model = User
     form_class = MyForm
@@ -38,6 +39,7 @@ class MyRegisterFormView(FormView):
 
     def form_invalid(self, form):
         return super(MyRegisterFormView, self).form_invalid(form)
+
 
 def confirm(request, email):
     if request.method == 'POST':

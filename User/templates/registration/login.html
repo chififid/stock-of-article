@@ -1,37 +1,42 @@
-{% block content %}
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-  {% else %}
-    <p>Please login to see this page.</p>
-  {% endif %}
-{% endif %}
-
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-
-<tr>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</tr>
-
-<tr>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login</title>
+  <link rel="stylesheet" href="{% static 'reset/reset.css' %}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+  <div class="main">
+    <div class="block">
+      <div class="header">
+        <div class="first_len">
+          <a onclick="javascript:history.back(); return false;"><img src="{% static 'img/back.png' %}" alt="" class="back"></a>
+          <div class="label">Вход</div>
+        </div>
+        <div class="information">Введите ваши данные, что бы войти в аккаунт</div>
+      </div>
+      <div class="errors">
+        {% if form.errors %}
+          <p class='error'>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+      </div>
+        <form method="post" action="{% url 'login' %}" class='form'>
+          {% csrf_token %}
+            <div class='login'>
+              <div class='login_label'><img src="{% static 'img/email-login.png' %}" alt=""></div>
+              <div class='login_input'>{{ form.username }}</div>
+            </div>
+            <div class='password'>
+              <div class='password_label'>Пароль</div>
+              <div class='password_input'>{{ form.password }}</div>
+            </div>
+            <input type="submit" value="Войти" class='login-button'/>
+            <input value="Зарегистрироваться" type="button" onclick="location.href='/account/register/'" class="register"/>
+            <input value="Забыли пороль?" type="button" onclick="location.href='/accounts/password_reset/'" class="forgot_password"/>
+          </form>
+    </div>
+</body>
+</html>

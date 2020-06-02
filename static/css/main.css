@@ -175,6 +175,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
 }
 
 .nav {
@@ -378,6 +379,68 @@ input::-moz-focus-inner, input::-moz-focus-inner {
 
 .sort_published input[type="radio"]:checked {
   background: url(../img/checkmarker.png) left center no-repeat;
+}
+
+.notification-menu {
+  position: absolute;
+  z-index: 5;
+  background: #ffffff;
+  display: block;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 0px;
+  height: 430px;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: width ease-in-out .8s, opacity ease-in-out .8s;
+  transition: width ease-in-out .8s, opacity ease-in-out .8s;
+  border-radius: 30px 0 0 30px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  text-indent: -9999px;
+}
+
+.alert-button {
+  border: none;
+  background-color: transparent;
+}
+
+.bookmark-menu {
+  position: absolute;
+  z-index: 5;
+  background: #ffffff;
+  display: block;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 0px;
+  height: 430px;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: width ease-in-out .8s, opacity ease-in-out .8s;
+  transition: width ease-in-out .8s, opacity ease-in-out .8s;
+  border-radius: 30px 0 0 30px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  text-indent: -9999px;
+}
+
+.bookmark-button {
+  border: none;
+  background-color: transparent;
+}
+
+.on {
+  opacity: 1;
+  width: 350px;
+  text-indent: 0;
 }
 
 @-webkit-keyframes alert_animation {
