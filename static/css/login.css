@@ -124,18 +124,6 @@ body {
   margin-left: 60px;
 }
 
-.forgot_password {
-  border: none;
-  background-color: white;
-  border: 1px solid black;
-  font-size: 15px;
-  border-radius: 30px;
-  font-family: "SegoePrintRegular";
-  padding: 0 30px 0px 30px;
-  height: 30px;
-  margin-left: 60px;
-}
-
 .register:hover {
   background-color: #eeeeeed0;
 }

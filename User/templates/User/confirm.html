@@ -1,5 +1,39 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Отправить" />
-</form>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'reset/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/confirm.css' %}">
+    <title>Подтверждение пороля</title>
+</head>
+<body>
+    <div class="main">
+        <div class="block">
+            <div class="header">
+                <div class="first_len">
+                    <a href="/"><img src="{% static 'img/back.png' %}" alt="" class="back"></a>
+                    <div class="label">Подтверждение e-mail</div>
+                </div>
+                <div class="information">Введите код из письма, который мы вам прислали на указанный e-mail</div>
+            </div>
+            <div class="errors">
+                {% if form.errors %}
+                    <p class='error'>Код подтверждение не верен, попробуйте снова</p>
+                {% endif %}
+            </div>
+            <form method="post" class="form">
+                {% csrf_token %}
+                <div class='keys'>
+                    {% for i in form.visible_fields %}
+                        <div class="key">{{ i }}</div>
+                    {% endfor %}
+                </div>
+                <a href="/account/reset_send_email/{{ email }}" class="repeat">Не пришел код? Выслать ещё раз</a>
+                <input type="submit" value="Подтвердить" class="button"/>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

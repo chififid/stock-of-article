@@ -153,10 +153,10 @@
                             {% endfor %}
                         {% endif %}
                     {% else %}
-                        <a href='{% url "login" %}' class="alert-have-no">У вас не найдено уведомлений</a>
+                        <p class="alert-have-no">Здесь пока ничего нет</p>
                     {% endif %}
                 {% else %}
-                    <a href='{% url "login" %}' class="alert-no">Данная опция не доступна для неаутифицированных</a>
+                    <a href='{% url "login" %}' class="alert-no">Войдите в профиль</a>
                 {% endif %}
             </div>
             <div class="bookmark-menu">
@@ -169,10 +169,10 @@
                             </a>
                         {% endfor %}
                     {% else %}
-                        <a href='{% url "login" %}' class="bookmark-have-no">У вас не найдено закладок</a>
+                        <p href='{% url "login" %}' class="bookmark-have-no">Здесь пока ничего нет</p>
                     {% endif %}
                 {% else %}
-                    <a href='{% url "login" %}' class="bookmark-no">Данная опция не доступна для неаутифицированных</a>
+                    <a href='{% url "login" %}' class="bookmark-no">Войдите в профиль</a>
                 {% endif %}
             </div>
         </div>

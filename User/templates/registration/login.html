@@ -20,7 +20,7 @@
       </div>
       <div class="errors">
         {% if form.errors %}
-          <p class='error'>Your username and password didn't match. Please try again.</p>
+          <p class='error'>Ваш логин и/или пароль неверны. Пожалуйста, попрубуйте ещё раз</p>
         {% endif %}
       </div>
         <form method="post" action="{% url 'login' %}" class='form'>

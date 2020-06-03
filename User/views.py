@@ -1,7 +1,8 @@
+from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
-from .forms import MyForm, ConfirmForm
+from .forms import MyForm, ConfirmFormSix
 from django.views.generic.edit import FormView
 from .models import User
 from .service import send
@@ -9,6 +10,7 @@ from random import randint
 from django.conf import settings
 from django.contrib import messages
 import requests
+from django.utils.translation import ugettext_lazy as _
 
 
 class MyRegisterFormView(FormView):
@@ -40,24 +42,38 @@ class MyRegisterFormView(FormView):
     def form_invalid(self, form):
         return super(MyRegisterFormView, self).form_invalid(form)
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        return context
+
 
 def confirm(request, email):
     if request.method == 'POST':
-        form = ConfirmForm(request.POST)
+        form = ConfirmFormSix(request.POST)
         if form.is_valid():
-            if int(form.cleaned_data["key"]) == int(User.objects.get(email=email).key):
+            key = str(form.cleaned_data["units"]) + str(form.cleaned_data["tens"])\
+                      + str(form.cleaned_data["hundreds"]) + str(form.cleaned_data["thousands"])\
+                      + str(form.cleaned_data["tens_of_thousands"]) + str(form.cleaned_data["hundreds_of_thousands"])
+            if int(key) == int(User.objects.get(email=email).key):
                 user = User.objects.get(email=email)
                 user.is_active = True
                 user.save()
-                return HttpResponseRedirect(reverse('register'))
+                return HttpResponseRedirect(reverse('main'))
             else:
-                context = {'form': form}
+                form.add_error('', ValidationError(_('Invalid value'), code='invalid'))
+                context = {'form': form, 'email': email}
                 return render(request, 'User/confirm.html', context)
 
         else:
-            context = {'form': form}
+            context = {'form': form, 'email': email}
             return render(request, 'User/confirm.html', context)
     else:
-        form = ConfirmForm()
-        context = {'form': form}
+        form = ConfirmFormSix()
+        context = {'form': form, 'email': email}
         return render(request, 'User/confirm.html', context)
+
+
+def reset_send_email_key(request, email):
+    key = User.objects.get(email=email).key
+    send(email, key)
+    return HttpResponseRedirect(reverse('confirm', kwargs={'email': email}))

@@ -404,7 +404,7 @@ input::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 0px;
-  height: 430px;
+  max-height: 430px;
   right: 0;
   opacity: 0;
   -webkit-transition: width cubic-bezier(0.4, 0.37, 0.22, 1.37) 0.8s, opacity cubic-bezier(0.4, 0.37, 0.22, 1.37) 0.8s;
@@ -433,7 +433,8 @@ input::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 0px;
-  height: 430px;
+  height: auto;
+  max-height: 430px;
   right: 0;
   opacity: 0;
   -webkit-transition: width cubic-bezier(0.4, 0.37, 0.22, 1.37) 0.8s, opacity cubic-bezier(0.4, 0.37, 0.22, 1.37) 0.8s;
@@ -508,6 +509,42 @@ input::-moz-focus-inner, input::-moz-focus-inner {
 
 .off {
   display: none;
+}
+
+.bookmark-no {
+  font-family: "SegoePrintRegular";
+  text-align: center;
+  font-size: 25px;
+  margin-left: 30px;
+  color: black;
+  opacity: 0.9;
+}
+
+.bookmark-have-no {
+  font-family: "SegoePrintRegular";
+  text-align: center;
+  font-size: 25px;
+  margin-left: 30px;
+  color: black;
+  opacity: 0.9;
+}
+
+.alert-have-no {
+  font-family: "SegoePrintRegular";
+  text-align: center;
+  font-size: 25px;
+  margin-left: 30px;
+  color: black;
+  opacity: 0.9;
+}
+
+.alert-no {
+  font-family: "SegoePrintRegular";
+  text-align: center;
+  font-size: 25px;
+  margin-left: 30px;
+  color: black;
+  opacity: 0.9;
 }
 
 .time {
