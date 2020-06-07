@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Выполненно</title>
+  <link rel="stylesheet" href="{% static 'reset/reset.css' %}">
+  <link rel="stylesheet" href="{% static 'css/done_password.css' %}">
+  <link rel="shortcut icon" href="{% static 'img/short-logo.png' %}" type="image/png">
+</head>
+<body>
+  <div class="main">
+    <div class="block">
+      <div class="header">
+        <div class="first_len">
+          <div class="label">Ссылка для сброса пароля успешно выслана на указанный e-mail</div>
+        </div>
+        <div class="information">Спасибо, что пользуетесь нашим сервисом!</div>
+      </div>
+      <div class="smile">
+        <div class="cat">
+          <img src="{% static 'img/lol.png' %}" alt="cat" class="img-cat">
+        </div>
+      </div>
+      <div class="buttons">
+        <input value="назад" type="button" onclick="javascript:history.back(); return false;" class="back button"/>
+        <input value="на главную" type="button" onclick="location.href='/'" class="home button"/>
+        <input value="войти" type="button" onclick="location.href='{% url "login" %}'" class="register button"/>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

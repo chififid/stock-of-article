@@ -1,12 +1,92 @@
-<form method="post" enctype='multipart/form-data'>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <script action="{% url 'register' %}" src='https://www.google.com/recaptcha/api.js'></script>
-        <div class="form-group g-recaptcha" data-sitekey="6LeByPQUAAAAABCouY18nSozyeeXtuBW1CeA_4nQ"></div>
-        {% if messages %}
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        {% endif %}
-    <input type="submit" value="Зарегистрировать">
-</form>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="{% static 'reset/reset.css' %}">
+  <link rel="stylesheet" href="{% static 'css/register.css' %}">
+  <link rel="shortcut icon" href="{% static 'img/short-logo.png' %}" type="image/png">
+</head>
+<body>
+    <div class="main">
+        <div class="block">
+            <div class="header">
+                <div class="first_len">
+                    <a onclick="javascript:history.back(); return false;"><img src="{% static 'img/back.png' %}" alt="" class="back"></a>
+                    <div class="label">Регистрация</div>
+                    <a href="/"><img src="{% static 'img/short-logo.png' %}" alt="" class="home"></a>
+                </div>
+                <div class="information">Введите данные, чтобы зарегистрироваться</div>
+            </div>
+            <form method="post" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="form">
+                    {% if form.username.errors %}
+                        <div class="form-information error">Логин</div>
+                        <div class="login input-form">{{ form.username }}</div>
+                    {% else %}
+                        <div class="form-information">Логин</div>
+                        <div class="login input-form">{{ form.username }}</div>
+                    {% endif %}
+                </div>
+                <div class="form">
+                    {% if form.password1.errors %}
+                        <div class="form-information error">Пароль</div>
+                        <div class="password input-form">{{ form.password1 }}</div>
+                    {% else %}
+                        <div class="form-information">Пароль</div>
+                        <div class="password input-form">{{ form.password1 }}</div>
+                    {% endif %}
+                </div>  
+                <div class="form">
+                    {% if form.password2.errors %}
+                        <div class="form-information error">Подтвердите пароль</div>
+                        <div class="repeate_password input-form">{{ form.password2 }}</div>
+                    {% else %}
+                        <div class="form-information">Подтвердите пароль</div>
+                        <div class="repeate_password input-form">{{ form.password2 }}</div>
+                    {% endif %}
+                </div>
+                <div class="form">
+                    {% if form.email.errors %}
+                        <div class="form-information error email">E-mail</div>
+                        <div class="e-mail input-form">{{ form.email }}</div>
+                    {% else %}
+                        <div class="form-information email">E-mail</div>
+                        <div class="e-mail input-form">{{ form.email }}</div>
+                    {% endif %}
+                </div>
+                <div class="form no-form">
+                    {% if form.img.errors %}
+                        <div class="form-information error avatar">Аватарка</div>
+                    {% else %}
+                        <div class="form-information avatar">Аватарка</div>
+                    {% endif %}
+                        <div class="fileinputs">
+                            {{ form.img }}
+                            <div class="fakefile">
+                                <img src="{% static 'img/camera.png' %}" class='fakeimg'></img>
+                                <label for="id_img"><img src="{% static 'img/camera-hover.png' %}" class='fakeimg-hover'></img></label>
+                            </div>
+                        </div>
+                        <label for="id_img" class="label-add">Добавить фотографию</label>
+                    {% if form.subjects.errors %}
+                        <div class="form-information error subjects-inf">Интересы</div>
+                        <div class="subjects">{{ form.subjects }}</div>
+                    {% else %}
+                        <div class="form-information subjects-inf">Интересы</div>
+                        <div class="subjects">{{ form.subjects }}</div>
+                    {% endif %}
+                </div>
+                <div class="buttons">
+                    <script action="{% url 'register' %}" src='https://www.google.com/recaptcha/api.js'></script>
+                        <div class="form-group g-recaptcha" data-sitekey="6LeByPQUAAAAABCouY18nSozyeeXtuBW1CeA_4nQ"></div>
+                    <input type="submit" class="register" value="Зарегистрироваться">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

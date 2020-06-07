@@ -108,7 +108,17 @@ body {
     height: 50px;
     margin-left: 60px;
 }
-
+.forgot_password {
+    border: none;
+    background-color: white;
+    border: 1px solid $placeholder;
+    font-size: 20px;
+    border-radius: 30px;
+    font-family: "SegoePrintRegular";
+    padding: 0 25px 0px 25px;
+    height: 40px;
+    margin-left: 60px;
+}
 .register:hover {
     background-color: #eeeeeed0;
 }
@@ -128,4 +138,8 @@ input::-moz-focus-inner, input::-moz-focus-inner {
     color: red;
     margin-left: 300px;
     transform: translate(0, 30px);
+}
+.home {
+    width: 50px;
+    margin: 10px 0 0 400px;
 }

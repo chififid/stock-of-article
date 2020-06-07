@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login</title>
+  <title>Вход</title>
   <link rel="stylesheet" href="{% static 'reset/reset.css' %}">
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <link rel="shortcut icon" href="{% static 'img/short-logo.png' %}" type="image/png">
 </head>
 <body>
   <div class="main">
@@ -15,6 +16,7 @@
         <div class="first_len">
           <a onclick="javascript:history.back(); return false;"><img src="{% static 'img/back.png' %}" alt="" class="back"></a>
           <div class="label">Вход</div>
+          <a href="/"><img src="{% static 'img/short-logo.png' %}" alt="" class="home"></a>
         </div>
         <div class="information">Введите ваши данные, что бы войти в аккаунт</div>
       </div>
@@ -34,8 +36,8 @@
               <div class='password_input'>{{ form.password }}</div>
             </div>
             <input type="submit" value="Войти" class='login-button'/>
-            <input value="Зарегистрироваться" type="button" onclick="location.href='/account/register/'" class="register"/>
-            <input value="Забыли пороль?" type="button" onclick="location.href='/accounts/password_reset/'" class="forgot_password"/>
+            <input value="Зарегистрироваться" type="button" onclick="location.href='{% url "register" %}'" class="register"/>
+            <input value="Забыли пороль?" type="button" onclick="location.href='{% url "password_reset" %}'" class="forgot_password"/>
           </form>
     </div>
 </body>
